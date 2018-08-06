@@ -113,13 +113,19 @@ export default class MessageContainer extends React.PureComponent {
   }
 
   renderHeaderWrapper() {
+    if (this.props.renderHeader) {
+      return (
+        <View style={styles.headerWrapper}>
+          {this.props.renderHeader()}
+          {this.renderLoadEarlier()}
+        </View>
+      );
+    }
+
     return <View style={styles.headerWrapper}>{this.renderLoadEarlier()}</View>;
   }
 
   render() {
-    if (this.props.messages.length === 0) {
-      return <View style={styles.container} />;
-    }
     return (
       <View style={styles.container}>
         <FlatList
